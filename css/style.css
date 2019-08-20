@@ -1,0 +1,226 @@
+#app {
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+  background: #f6f6f6;
+}
+#app .iconfont {
+  font-size: inherit;
+}
+#app .icon_text {
+  display: inline-block;
+  color: #979799;
+}
+#app .van-button--info {
+  background-color: #0098e3;
+  border: 1px solid #0098e3;
+  padding: 0 10px;
+}
+#app ._app-search .van-search__action {
+  color: #fff;
+}
+#app ._app-search .van-search__action:active {
+  background-color: #0098e3;
+}
+#app ._app-filter .filter-row {
+  padding: 10px;
+}
+#app ._app-filter .filter-row .filter-item {
+  font-size: 18px;
+  text-align: center;
+}
+#app ._app-filter .filter-row .filter-item i {
+  color: #0098e3;
+}
+#app ._app-filter .filter-row .left-line {
+  border-left: 1px solid #e5e5e5;
+}
+#app .info_app-list {
+  padding: 15px;
+}
+#app .info_app-list .list-item {
+  display: flex;
+  padding: 10px;
+  margin-bottom: 10px;
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 2px 2px 4px #e5e5e5;
+}
+#app .info_app-list .list-item ._item-logo {
+  height: 80px;
+  line-height: 80px;
+  width: 80px;
+  text-align: center;
+  font-size: 30px;
+}
+#app .info_app-list .list-item ._item-info {
+  flex: 1 1 auto;
+}
+#app .info_app-list .list-item ._item-info ._info-name {
+  height: 50px;
+  line-height: 50px;
+  font-size: 18px;
+}
+#app .info_app-list .list-item ._item-info ._info-desc {
+  font-size: 12px;
+  color: #979799;
+}
+#app .info_app-list .list-item ._item-info ._info-desc span:last-child {
+  margin-left: 30px;
+}
+#app ._app-top {
+  width: 100%;
+  height: 160px;
+  position: relative;
+  z-index: 999;
+  overflow: hidden;
+  text-align: center;
+  color: #fff;
+}
+#app ._app-top p {
+  margin: 10px;
+}
+#app ._app-top ._top-logo {
+  font-size: 30px;
+}
+#app ._app-top ._top-name {
+  font-size: 20px;
+}
+#app ._app-top ._top-legal,
+#app ._app-top ._top-tel {
+  font-size: 12px;
+}
+#app ._app-top:after {
+  content: '';
+  width: 110%;
+  height: 160px;
+  position: absolute;
+  left: -5%;
+  top: 0;
+  z-index: -1;
+  border-radius: 0 0 50% 50%;
+  background: #0098e3;
+}
+#app ._app-content ._content-content {
+  margin: 10px;
+  border-radius: 5px;
+  background: #fff;
+  padding: 30px 10px;
+}
+#app ._app-content ._content-content .content-item {
+  padding: 15px 0;
+  border-bottom: 1px solid #e5e5e5;
+  font-size: 14px;
+}
+#app .institution_app-list {
+  margin: 10px;
+  background: #fff;
+  border-radius: 5px;
+  padding: 10px;
+}
+#app .institution_app-list .list-filter {
+  text-align: center;
+  padding: 10px;
+  color: #0098e3;
+  border-bottom: 1px solid #e5e5e5;
+}
+#app .institution_app-list .list-item {
+  display: flex;
+  padding: 10px;
+  border-bottom: 1px solid #e5e5e5;
+}
+#app .institution_app-list .list-item ._item-left {
+  flex: 1 1 auto;
+}
+#app .institution_app-list .list-item ._item-left ._item-name {
+  margin: 5px 0;
+  font-size: 18px;
+}
+#app .institution_app-list .list-item ._item-left ._item-desc {
+  margin: 5px 0;
+  color: #979799;
+  font-size: 14px;
+}
+#app .institution_app-list .list-item ._item-left ._item-desc span:first-child {
+  margin-right: 10px;
+}
+#app .institution_app-list .list-item ._item-right {
+  width: 20px;
+  line-height: 80px;
+  text-align: center;
+}
+#app ._app-filter .van-dropdown-menu {
+  background: none;
+}
+#app ._app-filter .van-hairline--top-bottom:after {
+  border: none;
+}
+#app .log_app-list {
+  padding: 15px;
+}
+#app .log_app-list .list-item {
+  padding: 10px;
+  margin-bottom: 10px;
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 2px 2px 4px #e5e5e5;
+}
+#app .log_app-list .list-item .item-li {
+  margin: 10px 0;
+}
+#app .log_app-list .list-item .item-li .icon_text {
+  margin-right: 20px;
+}
+#app .log_app-list .list-item .item-li .li-btn {
+  float: right;
+}
+#app .log_app-list .list-item .item-title {
+  font-size: 14px;
+  height: 20px;
+}
+#app .log_app-list .list-item .item-title .li-tittle {
+  color: #0098e3;
+  float: left;
+  margin-left: 5px;
+}
+#app .log_app-list .list-item .item-title .li-except {
+  float: right;
+}
+#app .log_app-list .list-item .item-title .normal {
+  color: #0098e3;
+}
+#app .log_app-list .list-item .item-title .except {
+  color: #ff3900;
+}
+#app .log_app-list .list-item .item-title .li-title-icon {
+  float: left;
+  display: inline-block;
+  position: relative;
+  width: 20px;
+  height: 20px;
+}
+#app .log_app-list .list-item .item-title .li-title-icon .icon-bottom {
+  border: 10px solid transparent;
+  width: 0;
+  border-bottom: 10px solid #ff3900;
+  position: absolute;
+  top: -10px;
+}
+#app .log_app-list .list-item .item-title .li-title-icon .icon-top {
+  border: 10px solid transparent;
+  width: 0;
+  border-top: 10px solid #ff3900;
+  position: absolute;
+  bottom: -10px;
+}
+#app .log_app-list .list-item .item-title .li-title-icon span {
+  font-size: 10px;
+  position: absolute;
+  top: 3px;
+  left: 5px;
+  color: #fff;
+}
+#app .log_app-list .list-item .bottom-line {
+  padding-bottom: 5px;
+  border-bottom: 1px solid #e5e5e5;
+}

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巡查日志</title>
+    <link rel="stylesheet" href="css/vant.css">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1350866_3iuxhv0jkcb.css">
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+<div id="app" style="display: none;" :style="{display: 'block'}">
+    <div class="_app-search">
+        <van-search placeholder="巡查日志、巡查人员" v-model="value" show-action background="#0098E3">
+            <div slot="action" @click="onSearch">搜索</div>
+        </van-search>
+    </div>
+    <div class="_app-filter">
+        <van-dropdown-menu class="">
+            <van-dropdown-item title="巡查日期" @open="openCalendar" ref="DateRang">
+                <van-row style="text-align: center;padding: 10px;">
+                    <van-col span="8"><van-button type="default" size="small" @click="shortcutClick('day')">今日</van-button></van-col>
+                    <van-col span="8"><van-button type="default" size="small" @click="shortcutClick('week')">本周</van-button></van-col>
+                    <van-col span="8"><van-button type="default" size="small" @click="shortcutClick('month')">本月</van-button></van-col>
+                </van-row>
+                <inline-calendar ref="Calendar"
+                                 mode="during"
+                                 @change="onChange"
+                                 :default-date="defaultDate"
+                                 :min-date="minDate"
+                                 :max-date="maxDate"/>
+            </van-dropdown-item>
+            <van-dropdown-item v-model="except" :options="option" ></van-dropdown-item>
+        </van-dropdown-menu>
+    </div>
+    <div class="log_app-list">
+        <div class="list-item" v-for="item in dataList" @click="itemClick(item)">
+            <div class="item-li item-title bottom-line">
+                <div class="li-title-icon" style="">
+                    <div class="icon-bottom"></div>
+                    <div class="icon-top"></div>
+                    <span>查</span>
+                </div>
+                <span class="li-tittle">{{item.title}}</span>
+                <span class="li-except" v-text="item.except" :class="item.except==='正常'?'normal':'except'"></span>
+            </div>
+            <div class="item-li">
+                <span v-text="item.content"></span>
+            </div>
+            <div class="item-li">
+                <icon-text icon="iconic_project" :text="item.user"></icon-text>
+                <icon-text icon="iconic_project" :text="item.distance+'，'+item.duration"></icon-text>
+            </div>
+            <div class="item-li">
+                <icon-text icon="iconic_project" :text="item.time"></icon-text>
+                <van-button class="li-btn" type="info" size="mini">查 看 详 情</van-button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="js/vue.js"></script>
+<script src="js/vant.min.js"></script>
+<script src="js/dayjs.min.js"></script>
+<script src="js/Calendar.umd.min.js"></script>
+<script src="js/IconText.js"></script>
+<script>
+    // 注册 Vant 组件
+    Vue.use(vant);
+    Vue.use(Calendar);
+    new Vue({
+        el:'#app',
+        components:{
+            'icon-text':iconText
+        },
+        data(){
+            return{
+                value:'',
+                except:0,
+                option:[
+                    { text: '是否异常', value: 0 },
+                    { text: '正常', value: 1 },
+                    { text: '异常', value: 2 }
+                ],
+                show:true,
+                date:'',
+                minDate:dayjs(new Date(1990,0,1)),
+                maxDate:dayjs(new Date()),
+                defaultDate:[dayjs().startOf('week').add(1,'day'),dayjs()],
+                dataList:[
+                    {
+                        title:'巡查日志',
+                        except:'异常',
+                        content:'云西府一期3栋外立面脚手架有松动',
+                        user:'肖旭',
+                        distance:'125米',
+                        duration:'2分钟',
+                        time:'2019-09-18'
+                    },
+                    {
+                        title:'巡查日志',
+                        except:'正常',
+                        content:'云西府一期3栋外立面脚手架有松动,云西府一期3栋外立面脚手架有松动',
+                        user:'肖旭',
+                        distance:'125米',
+                        duration:'2分钟',
+                        time:'2019-09-18'
+                    },
+                    {
+                        title:'巡查日志',
+                        except:'正常',
+                        content:'云西府一期3栋外立面脚手架有松动',
+                        user:'肖旭',
+                        distance:'125米',
+                        duration:'2分钟',
+                        time:'2019-09-18'
+                    },
+                    {
+                        title:'巡查日志',
+                        except:'异常',
+                        content:'云西府一期3栋外立面脚手架有松动',
+                        user:'肖旭',
+                        distance:'125米',
+                        duration:'2分钟',
+                        time:'2019-09-18'
+                    },
+                    {
+                        title:'巡查日志',
+                        except:'异常',
+                        content:'云西府一期3栋外立面脚手架有松动',
+                        user:'肖旭',
+                        distance:'125米',
+                        duration:'2分钟',
+                        time:'2019-09-18'
+                    }
+                ]
+            }
+        },
+        methods:{
+            onSearch(){
+                this.$toast(this.value)
+            },
+            openCalendar(){
+                this.show=true
+            },
+            onChange(date){
+                if(date.length===2){
+                    this.date = JSON.stringify(date.map((item) => item.format('YYYY-MM-DD')))
+                    this.$refs.DateRang.toggle();
+                }
+            },
+            shortcutClick(mode){
+                let date=[]
+                if(mode==='day'){
+                    date=[dayjs(),dayjs()]
+                }else if(mode==='week'){
+                    date=[dayjs().startOf('week').add(1,'day'),dayjs()]
+                }else{
+                    date=[dayjs().startOf('month').add(1,'day'),dayjs()]
+                }
+                this.$refs.Calendar.changeDate(date)
+                this.date = JSON.stringify(date.map((item) => item.format('YYYY-MM-DD')))
+                this.$refs.DateRang.toggle()
+            },
+            itemClick(item){
+                this.$toast(item.content)
+            }
+        }
+    });
+</script>
+</body>
+</html>

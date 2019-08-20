@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>企业制度</title>
+    <link rel="stylesheet" href="css/vant.css">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1350866_3iuxhv0jkcb.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="app" style="display: none;" :style="{display: 'block'}">
+    <div class="_app-search">
+        <van-search placeholder="请输入搜索关键词" v-model="value" show-action background="#0098E3">
+            <div slot="action" @click="onSearch">搜索</div>
+        </van-search>
+    </div>
+    <div class="institution_app-list">
+        <div class="list-filter">
+            <span @click="filter">计划日期筛选 <i class="iconfont icondown"></i></span>
+        </div>
+        <div class="list-item" v-for="item in dataList" @click="itemClick(item)">
+            <div class="_item-left">
+                <div class="_item-name"><span v-text="item.name"></span></div>
+                <div class="_item-desc">
+                    <i class="iconfont iconic_project"></i>
+                    <span v-text="item.company">湖南国广置业有限公司</span>
+                </div>
+                <div class="_item-desc">
+                    <span><i class="iconfont iconic_project"></i> <span v-text="item.depart"></span></span>
+                    <span><i class="iconfont iconic_project"></i> <span v-text="item.creatTime"></span></span>
+                </div>
+            </div>
+            <div class="_item-right">
+                <i class="iconfont iconright"></i>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="js/vue.js"></script>
+<script src="js/vant.min.js"></script>
+<script>
+    // 注册 Vant 组件
+    Vue.use(vant);
+    new Vue({
+        el:'#app',
+        data(){
+            return{
+                value:'',
+                dataList:[
+                    {
+                        name:'国广公司行政安全制度汇编',
+                        company:'湖南国广置业有限公司',
+                        depart:'工程技术部',
+                        creatTime:'2019-08-15 11:18'
+                    },
+                    {
+                        name:'国广公司建筑工程安全生产制度汇编',
+                        company:'湖南国广置业有限公司',
+                        depart:'工程技术部',
+                        creatTime:'2019-08-15 11:18'
+                    },
+                    {
+                        name:'安全制度名称',
+                        company:'长房数创科技有限公司',
+                        depart:'研发部',
+                        creatTime:'2019-08-15 11:18'
+                    }
+                ]
+            }
+        },
+        methods:{
+            onSearch(){
+                this.$toast(this.value)
+            },
+            filter(){
+                this.$toast('计划日期筛选')
+            },
+            itemClick(item){
+                this.$toast(item.name)
+            }
+        }
+    });
+</script>
+</body>
+</html>

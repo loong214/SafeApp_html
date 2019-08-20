@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>企业基本信息</title>
+    <link rel="stylesheet" href="css/vant.css">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1350866_3iuxhv0jkcb.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="app" style="display: none;" :style="{display: 'block'}">
+    <div class="_app-top">
+        <p class="_top-logo">{{info.logo}}</p>
+        <p class="_top-name">{{info.name}}</p>
+        <p class="_top-legal"><span v-text="'法人 : '+info.legal"></span></p>
+        <p class="_top-tel"><span v-text="'法人电话 : '+info.tel"></span></p>
+    </div>
+    <div class="_app-content">
+        <van-tabs v-model="active" color="#0098E3">
+            <van-tab title="企业信息">
+                <div class="_content-content">
+                    <div class="content-item">
+                        <i class="iconfont iconic_project"></i>
+                        <span>法人身份证号码：</span>
+                        <span v-text="info.companyInfo.legalNo"></span>
+                    </div>
+                    <div class="content-item">
+                        <i class="iconfont iconic_project"></i>
+                        <span>安全生产许可证：</span>
+                        <span v-text="info.companyInfo.safeNo"></span>
+                    </div>
+                    <div class="content-item">
+                        <i class="iconfont iconic_project"></i>
+                        <span>营业执照代码：</span>
+                        <span v-text="info.companyInfo.businessLicense"></span>
+                    </div>
+                    <div class="content-item">
+                        <i class="iconfont iconic_project"></i>
+                        <span>组织机构代码：</span>
+                        <span v-text="info.companyInfo.organizational"></span>
+                    </div>
+                    <div class="content-item">
+                        <i class="iconfont iconic_project"></i>
+                        <span>所属组织机构：</span>
+                        <span v-text="info.companyInfo.underOrganizational"></span>
+                    </div>
+                </div>
+            </van-tab>
+            <van-tab title="责任人">
+                <div class="_content-content">
+                    <div class="content-item">
+                        <i class="iconfont iconic_project"></i>
+                        <span>联系人：</span>
+                        <span v-text="info.legalInfo.contact"></span>
+                    </div>
+                    <div class="content-item">
+                        <i class="iconfont iconic_project"></i>
+                        <span>联系电话：</span>
+                        <span v-text="info.legalInfo.contactTel"></span>
+                    </div>
+                    <div class="content-item">
+                        <i class="iconfont iconic_project"></i>
+                        <span>安全生产负责人：</span>
+                        <span v-text="info.legalInfo.safeContact"></span>
+                    </div>
+                    <div class="content-item">
+                        <i class="iconfont iconic_project"></i>
+                        <span>安全生产负责人电话：</span>
+                        <span v-text="info.legalInfo.safeContactTel"></span>
+                    </div>
+                    <div class="content-item">
+                        <i class="iconfont iconic_project"></i>
+                        <span>标准化级别：</span>
+                        <span v-text="info.legalInfo.level"></span>
+                    </div>
+                </div>
+            </van-tab>
+            <van-tab title="信息相关">
+                <div class="_content-content">
+                    <div class="content-item">
+                        <i class="iconfont iconic_project"></i>
+                        <span>创建者：</span>
+                        <span v-text="info.baseInfo.creat"></span>
+                    </div>
+                    <div class="content-item">
+                        <i class="iconfont iconic_project"></i>
+                        <span>创建时间：</span>
+                        <span v-text="info.baseInfo.creatTime"></span>
+                    </div>
+                    <div class="content-item">
+                        <i class="iconfont iconic_project"></i>
+                        <span>备注：</span>
+                        <span v-text="info.baseInfo.remark"></span>
+                    </div>
+                    <div class="content-item">
+                        <i class="iconfont iconic_project"></i>
+                        <span>附件：</span>
+                        <span v-text="info.baseInfo.file"></span>
+                    </div>
+                </div>
+            </van-tab>
+        </van-tabs>
+    </div>
+
+</div>
+<script src="js/vue.js"></script>
+<script src="js/vant.min.js"></script>
+<script>
+    // 注册 Vant 组件
+    Vue.use(vant);
+    new Vue({
+        el:'#app',
+        data(){
+            return{
+                info:{
+                    logo:'房',
+                    name:'长沙房地产开发有限公司',
+                    legal:'李达康',
+                    tel:'13888888888',
+                    companyInfo:{
+                        legalNo:'430198803311011',
+                        safeNo:'ER4045849',
+                        businessLicense:'LP40530450',
+                        organizational:'KL9453945903',
+                        underOrganizational:'长沙东方新城地产开发有限公司'
+                    },
+                    legalInfo:{
+                        contact:'李达康',
+                        contactTel:'18073667988',
+                        safeContact:'沙瑞金',
+                        safeContactTel:'18073627922',
+                        level:'高级',
+                    },
+                    baseInfo:{
+                        creat:'高小琴',
+                        creatTime:'2019-8-14',
+                        remark:'备注',
+                        file:'—'
+                    }
+                },
+                active:'企业信息',
+            }
+        },
+        methods:{
+
+        }
+    });
+</script>
+</body>
+</html>

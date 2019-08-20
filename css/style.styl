@@ -1,0 +1,261 @@
+$body=#f6f6f6
+$primary=#0098E3
+$line=#e5e5e5
+$desc=#979799
+$background=#fff
+$warn=#FF3900
+#app{
+  width 100%;
+  min-height 100vh;
+  overflow hidden;
+  background $body;
+
+  //======================  iconfont ===============================
+  .iconfont{
+    font-size inherit;
+  }
+
+  //========================IconText==================================
+  .icon_text{
+    display inline-block;
+    color $desc;
+  }
+  //=======================Vant Info Btn==================================
+  .van-button--info{
+    background-color $primary;
+    border 1px solid $primary;
+    padding 0 10px;
+  }
+
+ //=========================    企业信息    ==============================
+  ._app-search{
+    .van-search__action{
+      color $background
+    }
+    .van-search__action:active{
+      background-color $primary;
+    }
+  }
+  ._app-filter{
+    .filter-row{
+      padding 10px;
+      .filter-item{
+        font-size 18px;
+        text-align center;
+        i{
+          color $primary;
+        }
+      }
+      .left-line{
+        border-left 1px solid $line
+      }
+    }
+  }
+  .info_app-list{
+    padding 15px;
+    .list-item{
+      display flex;
+      padding 10px;
+      margin-bottom 10px;
+      background $background;
+      border-radius 5px;
+      box-shadow 2px 2px 4px $line;
+      ._item-logo{
+        height 80px;
+        line-height 80px;
+        width: 80px;
+        text-align center;
+        font-size 30px;
+      }
+      ._item-info{
+        flex 1 1 auto;
+        ._info-name{
+          height 50px;
+          line-height 50px;
+          font-size 18px;
+        }
+        ._info-desc{
+          font-size 12px;
+          color $desc;
+          span:last-child{
+            margin-left 30px;
+          }
+        }
+      }
+    }
+  }
+
+
+
+//==========================企业基本信息================================
+  ._app-top{
+    width 100%;
+    height  160px;
+    position  relative;
+    z-index  999;
+    overflow  hidden;
+    text-align  center;
+    color $background;
+    p{
+      margin 10px;
+    }
+    ._top-logo{
+      font-size 30px;
+    }
+    ._top-name{
+      font-size 20px;
+    }
+    ._top-legal,._top-tel{
+      font-size 12px;
+    }
+  }
+  ._app-top:after{
+    content  '';
+    width  110%;
+    height  160px;
+    position  absolute;
+    left  -5%;
+    top  0;
+    z-index  -1;
+    border-radius  0 0 50% 50%;
+    background  $primary;
+  }
+
+  ._app-content{
+    ._content-content{
+      margin 10px;
+      border-radius 5px;
+      background $background
+      padding 30px 10px;
+      .content-item{
+        padding 15px 0;
+        border-bottom 1px solid $line;
+        font-size 14px;
+      }
+    }
+  }
+
+
+
+//==========================企业制度================================
+  .institution_app-list{
+    margin 10px;
+    background $background;
+    border-radius 5px;
+    padding 10px;
+    .list-filter{
+      text-align center;
+      padding 10px;
+      color $primary;
+      border-bottom 1px solid $line;
+    }
+    .list-item{
+      display flex;
+      padding 10px;
+      border-bottom 1px solid $line;
+      ._item-left{
+        flex 1 1 auto;
+        ._item-name{
+          margin 5px 0;
+          font-size 18px;
+        }
+        ._item-desc{
+          margin 5px 0;
+          color $desc;
+          font-size 14px;
+          span:first-child{
+            margin-right 10px;
+          }
+        }
+      }
+      ._item-right{
+        width 20px;
+        line-height 80px;
+        text-align center;
+      }
+    }
+  }
+
+
+
+//==========================  巡查日志    ==================================
+
+  ._app-filter{
+    .van-dropdown-menu{
+      background none;
+    }
+    .van-hairline--top-bottom:after{
+      border none;
+    }
+  }
+
+  .log_app-list{
+    padding 15px;
+    .list-item{
+      padding 10px;
+      margin-bottom 10px;
+      background $background;
+      border-radius 5px;
+      box-shadow 2px 2px 4px $line;
+      .item-li{
+        margin 10px 0;
+        .icon_text{
+          margin-right 20px;
+        }
+        .li-btn{
+          float right;
+        }
+      }
+      .item-title{
+        font-size 14px;
+        height 20px;
+        .li-tittle{
+          color:$primary
+          float left;
+          margin-left 5px;
+        }
+        .li-except{
+          float right;
+        }
+        .normal{
+          color:$primary
+        }
+        .except{
+          color:$warn
+        }
+        .li-title-icon{
+          float left;
+          display inline-block;
+          position relative;
+          width 20px;
+          height 20px;
+          .icon-bottom{
+            border 10px solid transparent;
+            width 0;
+            border-bottom 10px solid $warn;
+            position absolute;
+            top -10px;
+          }
+          .icon-top {
+            border 10px solid transparent;
+            width 0;
+            border-top 10px solid $warn;
+            position absolute;
+            bottom -10px;
+          }
+          span{
+            font-size 10px;
+            position absolute;
+            top 3px;
+            left 5px;
+            color $background;
+          }
+        }
+      }
+      .bottom-line{
+        padding-bottom 5px;
+        border-bottom 1px solid $line;
+      }
+    }
+  }
+}

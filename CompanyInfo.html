@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>企业信息</title>
+    <link rel="stylesheet" href="css/vant.css">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1350866_3iuxhv0jkcb.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="app" style="display: none;" :style="{display: 'block'}">
+    <div class="_app-search">
+        <van-search placeholder="请输入搜索关键词" v-model="value" show-action background="#0098E3">
+            <div slot="action" @click="onSearch">搜索</div>
+        </van-search>
+    </div>
+    <div class="_app-filter">
+        <van-row class="filter-row">
+            <van-col span="12">
+                <div class="filter-item">
+                    <span @click="sort"><i class="iconfont iconicon-"></i>排序</span>
+                </div>
+            </van-col>
+            <van-col span="12">
+                <div class="filter-item left-line">
+                    <span @click="filter"><i class="iconfont iconfilter"></i>筛选</span>
+                </div>
+            </van-col>
+        </van-row>
+    </div>
+    <div class="info_app-list">
+        <div class="list-item" v-for="item in dataList" @click="itemClick(item)">
+            <div class="_item-logo">{{item.logo}}</div>
+            <div class="_item-info">
+                <div class="_info-name">
+                    <i class="iconfont iconic_project"></i>
+                    <span v-text="item.name"></span>
+                </div>
+                <div class="_info-desc">
+                    <span v-text="'法人 : '+item.legal"></span>
+                    <span v-text="'安全生产责任人 : '+item.duty"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="js/vue.js"></script>
+<script src="js/vant.min.js"></script>
+<script>
+    // 注册 Vant 组件
+    Vue.use(vant);
+    new Vue({
+        el:'#app',
+        data(){
+            return{
+                value:'',
+                dataList:[
+                    {
+                        logo:'房',
+                        name:'长沙房地产开发有限公司',
+                        legal:'李达康',
+                        duty:'沙瑞金'
+                    },
+                    {
+                        logo:'旧',
+                        name:'长沙旧城改建发展公司',
+                        legal:'李达康',
+                        duty:'沙瑞金'
+                    },
+                    {
+                        logo:'麓',
+                        name:'麓谷文化产业基地',
+                        legal:'李达康',
+                        duty:'沙瑞金'
+                    },
+                    {
+                        logo:'置',
+                        name:'湖南置业有限公司',
+                        legal:'李达康',
+                        duty:'沙瑞金'
+                    },
+                    {
+                        logo:'投',
+                        name:'湖南投资置业有限公司',
+                        legal:'李达康',
+                        duty:'沙瑞金'
+                    }
+                ]
+            }
+        },
+        methods:{
+            onSearch(){
+                this.$toast(this.value)
+            },
+            sort(){
+                this.$toast('排序')
+            },
+            filter(){
+                this.$toast('筛选')
+            },
+            itemClick(item){
+                window.location.href='CompanyInfoDetail.html'
+                this.$toast(item.name)
+            }
+        }
+    });
+</script>
+</body>
+</html>
