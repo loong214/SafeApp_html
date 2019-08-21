@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>企业制度</title>
     <link rel="stylesheet" href="css/vant.css">
-    <link rel="stylesheet" href="//at.alicdn.com/t/font_1350866_3iuxhv0jkcb.css">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1350866_fcmf35v7yis.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -23,12 +23,17 @@
             <div class="_item-left">
                 <div class="_item-name"><span v-text="item.name"></span></div>
                 <div class="_item-desc">
-                    <i class="iconfont iconic_project"></i>
-                    <span v-text="item.company">湖南国广置业有限公司</span>
+                    <icon-text icon="iconic_project" :text="item.company" type="desc"></icon-text>
                 </div>
                 <div class="_item-desc">
-                    <span><i class="iconfont iconic_project"></i> <span v-text="item.depart"></span></span>
-                    <span><i class="iconfont iconic_project"></i> <span v-text="item.creatTime"></span></span>
+                    <van-row>
+                        <van-col span="12">
+                            <icon-text icon="iconbumenyongneng" :text="item.depart" type="desc"></icon-text>
+                        </van-col>
+                        <van-col span="12">
+                            <icon-text icon="iconyuyuetoubiao" :text="item.creatTime" type="desc"></icon-text>
+                        </van-col>
+                    </van-row>
                 </div>
             </div>
             <div class="_item-right">
@@ -39,11 +44,15 @@
 </div>
 <script src="js/vue.js"></script>
 <script src="js/vant.min.js"></script>
+<script src="js/IconText.js"></script>
 <script>
     // 注册 Vant 组件
     Vue.use(vant);
     new Vue({
         el:'#app',
+        components:{
+            'icon-text':iconText
+        },
         data(){
             return{
                 value:'',

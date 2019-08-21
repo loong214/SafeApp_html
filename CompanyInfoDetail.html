@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>企业基本信息</title>
     <link rel="stylesheet" href="css/vant.css">
-    <link rel="stylesheet" href="//at.alicdn.com/t/font_1350866_3iuxhv0jkcb.css">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1350866_fcmf35v7yis.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -21,28 +21,23 @@
             <van-tab title="企业信息">
                 <div class="_content-content">
                     <div class="content-item">
-                        <i class="iconfont iconic_project"></i>
-                        <span>法人身份证号码：</span>
+                        <icon-text icon="iconshenfenzheng" text="法人身份证号码："></icon-text>
                         <span v-text="info.companyInfo.legalNo"></span>
                     </div>
                     <div class="content-item">
-                        <i class="iconfont iconic_project"></i>
-                        <span>安全生产许可证：</span>
+                        <icon-text icon="iconanquanzhongxin" text="安全生产许可证："></icon-text>
                         <span v-text="info.companyInfo.safeNo"></span>
                     </div>
                     <div class="content-item">
-                        <i class="iconfont iconic_project"></i>
-                        <span>营业执照代码：</span>
+                        <icon-text icon="iconyingyezhizhao" text="营业执照代码："></icon-text>
                         <span v-text="info.companyInfo.businessLicense"></span>
                     </div>
                     <div class="content-item">
-                        <i class="iconfont iconic_project"></i>
-                        <span>组织机构代码：</span>
+                        <icon-text icon="iconzuzhijigou" text="组织机构代码："></icon-text>
                         <span v-text="info.companyInfo.organizational"></span>
                     </div>
                     <div class="content-item">
-                        <i class="iconfont iconic_project"></i>
-                        <span>所属组织机构：</span>
+                        <icon-text icon="iconsvg-" text="所属组织机构："></icon-text>
                         <span v-text="info.companyInfo.underOrganizational"></span>
                     </div>
                 </div>
@@ -50,28 +45,23 @@
             <van-tab title="责任人">
                 <div class="_content-content">
                     <div class="content-item">
-                        <i class="iconfont iconic_project"></i>
-                        <span>联系人：</span>
+                        <icon-text icon="iconshenfenzheng" text="联系人："></icon-text>
                         <span v-text="info.legalInfo.contact"></span>
                     </div>
                     <div class="content-item">
-                        <i class="iconfont iconic_project"></i>
-                        <span>联系电话：</span>
+                        <icon-text icon="iconanquanzhongxin" text="联系电话："></icon-text>
                         <span v-text="info.legalInfo.contactTel"></span>
                     </div>
                     <div class="content-item">
-                        <i class="iconfont iconic_project"></i>
-                        <span>安全生产负责人：</span>
+                        <icon-text icon="iconyingyezhizhao" text="安全生产负责人："></icon-text>
                         <span v-text="info.legalInfo.safeContact"></span>
                     </div>
                     <div class="content-item">
-                        <i class="iconfont iconic_project"></i>
-                        <span>安全生产负责人电话：</span>
+                        <icon-text icon="iconzuzhijigou" text="安全生产负责人电话："></icon-text>
                         <span v-text="info.legalInfo.safeContactTel"></span>
                     </div>
                     <div class="content-item">
-                        <i class="iconfont iconic_project"></i>
-                        <span>标准化级别：</span>
+                        <icon-text icon="iconsvg-" text="标准化级别："></icon-text>
                         <span v-text="info.legalInfo.level"></span>
                     </div>
                 </div>
@@ -79,23 +69,19 @@
             <van-tab title="信息相关">
                 <div class="_content-content">
                     <div class="content-item">
-                        <i class="iconfont iconic_project"></i>
-                        <span>创建者：</span>
+                        <icon-text icon="iconshenfenzheng" text="创建者："></icon-text>
                         <span v-text="info.baseInfo.creat"></span>
                     </div>
                     <div class="content-item">
-                        <i class="iconfont iconic_project"></i>
-                        <span>创建时间：</span>
+                        <icon-text icon="iconanquanzhongxin" text="创建时间："></icon-text>
                         <span v-text="info.baseInfo.creatTime"></span>
                     </div>
                     <div class="content-item">
-                        <i class="iconfont iconic_project"></i>
-                        <span>备注：</span>
+                        <icon-text icon="iconyingyezhizhao" text="备注："></icon-text>
                         <span v-text="info.baseInfo.remark"></span>
                     </div>
                     <div class="content-item">
-                        <i class="iconfont iconic_project"></i>
-                        <span>附件：</span>
+                        <icon-text icon="iconsvg-" text="附件："></icon-text>
                         <span v-text="info.baseInfo.file"></span>
                     </div>
                 </div>
@@ -106,11 +92,15 @@
 </div>
 <script src="js/vue.js"></script>
 <script src="js/vant.min.js"></script>
+<script src="js/IconText.js"></script>
 <script>
     // 注册 Vant 组件
     Vue.use(vant);
     new Vue({
         el:'#app',
+        components:{
+            'icon-text':iconText
+        },
         data(){
             return{
                 info:{

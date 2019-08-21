@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>企业信息</title>
     <link rel="stylesheet" href="css/vant.css">
-    <link rel="stylesheet" href="//at.alicdn.com/t/font_1350866_3iuxhv0jkcb.css">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1350866_fcmf35v7yis.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -34,8 +34,7 @@
             <div class="_item-logo">{{item.logo}}</div>
             <div class="_item-info">
                 <div class="_info-name">
-                    <i class="iconfont iconic_project"></i>
-                    <span v-text="item.name"></span>
+                    <icon-text icon="iconic_project" :text="item.name"></icon-text>
                 </div>
                 <div class="_info-desc">
                     <span v-text="'法人 : '+item.legal"></span>
@@ -47,11 +46,15 @@
 </div>
 <script src="js/vue.js"></script>
 <script src="js/vant.min.js"></script>
+<script src="js/IconText.js"></script>
 <script>
     // 注册 Vant 组件
     Vue.use(vant);
     new Vue({
         el:'#app',
+        components:{
+            'icon-text':iconText
+        },
         data(){
             return{
                 value:'',

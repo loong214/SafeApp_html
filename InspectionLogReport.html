@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巡查上报</title>
+    <link rel="stylesheet" href="css/vant.css">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1350866_fcmf35v7yis.css">
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+
+<div id="app" style="display: none;" :style="{display: 'block'}">
+    <div class="_app-card">
+        <div class="card-title">基本信息</div>
+        <div class="card-content">
+            <div class="content-item">
+                <icon-text icon="iconweizhi" text="巡查位置："></icon-text>
+                <div class="_item-field">
+                    <span v-text="data.location"></span>
+                </div>
+            </div>
+            <div class="content-item">
+                <icon-text icon="iconweizhi" text="巡查人员："></icon-text>
+                <div class="_item-field">
+                    <span v-text="data.user"></span>
+                </div>
+            </div>
+            <div class="content-item">
+                <icon-text icon="iconiconzhengli_xiangmu" text="项目名称："></icon-text>
+                <div class="_item-field">
+                    <van-field
+                            v-model="data.projectName"
+                            readonly
+                            right-icon="arrow-down"
+                            placeholder="请选择"
+                            @click="projectNameShow = true"
+                    />
+                </div>
+                <van-popup
+                        v-model="projectNameShow"
+                        position="bottom">
+                    <van-picker
+                            show-toolbar
+                            title="项目"
+                            :columns="projectData"
+                            @cancel="projectNameShow = false"
+                            @confirm="projectConfirm"
+                    />
+                </van-popup>
+
+            </div>
+            <div class="content-item">
+                <icon-text icon="iconbiaojidian1" text="标  段  栋："></icon-text>
+                <div class="_item-field">
+                    <van-field
+                            v-model="data.buildName"
+                            readonly
+                            right-icon="arrow-down"
+                            placeholder="请选择"
+                            @click="buildNameShow = true"
+                    />
+                </div>
+                <van-popup
+                        v-model="buildNameShow"
+                        position="bottom">
+                    <van-picker
+                            show-toolbar
+                            title="栋"
+                            :columns="buildData"
+                            @cancel="buildNameShow = false"
+                            @confirm="buildConfirm"
+                    />
+                </van-popup>
+            </div>
+            <div class="content-item">
+                <icon-text icon="iconrizhiyichang" text="是否异常："></icon-text>
+                <div class="_item-field">
+                    <switch-text v-model="data.except" :size="24" active-text="正常" inactive-text="异常"></switch-text>
+                </div>
+            </div>
+            <div class="content-item">
+                <icon-text icon="icontupian" text="巡查图片："></icon-text>
+                <div class="_item-field">
+                    <van-uploader v-model="fileList" multiple />
+                </div>
+            </div>
+            <div class="content-item">
+                <icon-text icon="iconbianji" text="详细说明："></icon-text>
+                <div class="_item-field">
+                    <van-field
+                            v-model="data.remark"
+                            type="textarea"
+                            placeholder="请输入详细说明"
+                            rows="2"
+                            autosize></van-field>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="_app-card">
+        <div class="card-title">巡查规范</div>
+        <div class="card-content">
+            <van-tabs v-model="active" swipeable>
+                <van-tab v-for="item in patrol" :title="item.title">
+                    <div class="_card-tab-content">
+                        <div class="_content-item item-title">
+                            <div class="_item-no">序号</div>
+                            <div class="_item-standard">规范</div>
+                            <div class="_item-check">是否规范</div>
+                        </div>
+                        <div class="_content-item" v-for="(_item,index) in item.data">
+                            <div class="_item-no">{{index+1}}</div>
+                            <div class="_item-standard">{{_item.item}}</div>
+                            <div class="_item-check">
+                                <switch-text v-model="_item.standard" :size="20"></switch-text>
+                            </div>
+                        </div>
+                    </div>
+                </van-tab>
+            </van-tabs>
+        </div>
+    </div>
+    <div class="_app-row-btn">
+        <van-button type="info" class="btn" @click="submit">确 认</van-button>
+        <van-button plain type="info" class="btn" @click="cancel">取 消</van-button>
+    </div>
+
+</div>
+<script src="js/vue.js"></script>
+<script src="js/vant.min.js"></script>
+<script src="js/IconText.js"></script>
+<script src="js/SwitchText.js"></script>
+<script>
+    // 注册 Vant 组件
+    Vue.use(vant);
+    new Vue({
+        el:'#app',
+        components:{
+            'icon-text':iconText,
+            'switch-text':switchText
+        },
+        data(){
+            return{
+                data:{
+                    title:'云西府一期3栋外立面脚手架有松动',
+                    location:'云西府一期3栋',
+                    startEndAddress:'云西府一期1栋-云西府一期5栋',
+                    projectName:'',
+                    buildName:'',
+                    except:true,
+                    pics:['https://img.yzcdn.cn/vant/cat.jpeg','https://img.yzcdn.cn/vant/cat.jpeg','https://img.yzcdn.cn/vant/cat.jpeg'],
+                    remark:'云西府一期3栋外立面脚手架有松动,云西府一期3栋外立面脚手架有松动,云西府一期3栋外立面脚手架有松动',
+                    date:'2019-08-20',
+                    user:'肖旭'
+                },
+                patrol:[
+                    {
+                        title:'储叶柜',
+                        data:[
+                            {
+                                item:'储叶柜尾部应该设置观察门，出料口应设置......',
+                                standard:true
+                            },
+                            {
+                                item:'储叶柜尾部应该设置观察门，出料口应设置......',
+                                standard:true
+                            },
+                            {
+                                item:'储叶柜尾部应该设置观察门，出料口应设置......',
+                                standard:true
+                            },
+                            {
+                                item:'储叶柜尾部应该设置观察门，出料口应设置......',
+                                standard:true
+                            },
+                            {
+                                item:'储叶柜尾部应该设置观察门，出料口应设置......',
+                                standard:true
+                            },
+                            {
+                                item:'储叶柜尾部应该设置观察门，出料口应设置......',
+                                standard:true
+                            }
+                        ]
+                    },
+                    {
+                        title:'轮扣式脚手架',
+                        data:[
+                            {
+                                item:'轮扣式脚手架尾部应该设置观察门，出料口应设置......',
+                                standard:true
+                            },
+                            {
+                                item:'轮扣式脚手架尾部应该设置观察门，出料口应设置......',
+                                standard:true
+                            },
+                            {
+                                item:'轮扣式脚手架尾部应该设置观察门，出料口应设置......',
+                                standard:true
+                            },
+                            {
+                                item:'轮扣式脚手架尾部应该设置观察门，出料口应设置......',
+                                standard:true
+                            },
+                            {
+                                item:'轮扣式脚手架尾部应该设置观察门，出料口应设置......',
+                                standard:true
+                            }
+                        ]
+                    },
+                    {
+                        title:'钢筋混凝土模板',
+                        data:[
+                            {
+                                item:'钢筋混凝土模板尾部应该设置观察门，出料口应设置......',
+                                standard:true
+                            },
+                            {
+                                item:'钢筋混凝土模板尾部应该设置观察门，出料口应设置......',
+                                standard:true
+                            },
+                            {
+                                item:'钢筋混凝土模板尾部应该设置观察门，出料口应设置......',
+                                standard:true
+                            }
+                        ]
+                    },
+                    {
+                        title:'塔式起重机',
+                        data:[
+                            {
+                                item:'塔式起重机尾部应该设置观察门，出料口应设置......',
+                                standard:true
+                            },
+                            {
+                                item:'塔式起重机尾部应该设置观察门，出料口应设置......',
+                                standard:true
+                            },
+                            {
+                                item:'塔式起重机尾部应该设置观察门，出料口应设置......',
+                                standard:true
+                            },
+                            {
+                                item:'塔式起重机尾部应该设置观察门，出料口应设置......',
+                                standard:true
+                            },
+                            {
+                                item:'塔式起重机尾部应该设置观察门，出料口应设置......',
+                                standard:true
+                            },
+                            {
+                                item:'塔式起重机尾部应该设置观察门，出料口应设置......',
+                                standard:true
+                            }
+                        ]
+                    }
+                ],
+                fileList: [
+                    { url: 'https://img.yzcdn.cn/vant/cat.jpeg' }
+                ],
+                projectNameShow:false,
+                buildNameShow:false,
+                projectData:[
+                    {
+                        text:'云时代',
+                        value:'1001',
+                        build:[
+                            {
+                                text:'三期1栋',
+                                value:'100101'
+                            },
+                            {
+                                text:'三期2栋',
+                                value:'100102'
+                            },
+                            {
+                                text:'三期3栋',
+                                value:'100103'
+                            },
+                            {
+                                text:'三期4栋',
+                                value:'100104'
+                            },
+                            {
+                                text:'三期5栋',
+                                value:'100105'
+                            },
+                            {
+                                text:'三期6栋',
+                                value:'100106'
+                            },
+                            {
+                                text:'三期7栋',
+                                value:'100107'
+                            }
+                        ]
+                    },
+                    {
+                        text:'云西府',
+                        value:'1002',
+                        build:[
+                            {
+                                text:'一期1栋',
+                                value:'100201'
+                            },
+                            {
+                                text:'一期2栋',
+                                value:'100202'
+                            },
+                            {
+                                text:'一期3栋',
+                                value:'100203'
+                            },
+                            {
+                                text:'一期4栋',
+                                value:'100204'
+                            },
+                            {
+                                text:'一期5栋',
+                                value:'100205'
+                            },
+                            {
+                                text:'一期6栋',
+                                value:'100206'
+                            },
+                            {
+                                text:'一期7栋',
+                                value:'100207'
+                            }
+                        ]
+                    },
+                    {
+                        text:'金阳府',
+                        value:'1003',
+                        build:[
+                            {
+                                text:'御府1栋',
+                                value:'100301'
+                            },
+                            {
+                                text:'御府2栋',
+                                value:'100302'
+                            },
+                            {
+                                text:'御府3栋',
+                                value:'100303'
+                            },
+                            {
+                                text:'御府4栋',
+                                value:'100304'
+                            },
+                            {
+                                text:'御府5栋',
+                                value:'100305'
+                            },
+                            {
+                                text:'御府6栋',
+                                value:'100306'
+                            },
+                            {
+                                text:'御府7栋',
+                                value:'100307'
+                            }
+                        ]
+                    },
+                    {
+                        text:'雍景湾',
+                        value:'1004',
+                        build:[
+                            {
+                                text:'江湾1栋',
+                                value:'100401'
+                            },
+                            {
+                                text:'江湾2栋',
+                                value:'100402'
+                            },
+                            {
+                                text:'江湾3栋',
+                                value:'100403'
+                            },
+                            {
+                                text:'江湾4栋',
+                                value:'100404'
+                            },
+                            {
+                                text:'江湾5栋',
+                                value:'100405'
+                            },
+                            {
+                                text:'江湾6栋',
+                                value:'100406'
+                            },
+                            {
+                                text:'江湾7栋',
+                                value:'100407'
+                            }
+                        ]
+                    }
+                ],
+                active:'储叶柜'
+            }
+        },
+        computed: {
+            buildData(){
+                let item=this.projectData.filter(item=>{
+                    return item.text===this.data.projectName
+                })
+                if(item.length>0){
+                    return item[0].build
+                }else{
+                    return []
+                }
+            }
+        },
+        methods:{
+            projectConfirm(value){
+                this.data.buildName=''
+                this.data.projectName = value.text
+                this.projectNameShow = false
+            },
+            buildConfirm(value){
+                this.data.buildName = value.text
+                this.buildNameShow = false
+            },
+            imgPreview(index){
+                vant.ImagePreview({
+                    images: this.data.pics,
+                    startPosition: index
+                })
+            },
+            submit(){
+                this.$toast('提交成功')
+            },
+            cancel(){
+
+            },
+
+        }
+    });
+</script>
+</body>
+</html>

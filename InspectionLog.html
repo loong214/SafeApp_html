@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>巡查日志</title>
     <link rel="stylesheet" href="css/vant.css">
-    <link rel="stylesheet" href="//at.alicdn.com/t/font_1350866_3iuxhv0jkcb.css">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1350866_fcmf35v7yis.css">
     <link rel="stylesheet" href="css/style.css">
 
 </head>
@@ -49,11 +49,17 @@
                 <span v-text="item.content"></span>
             </div>
             <div class="item-li">
-                <icon-text icon="iconic_project" :text="item.user"></icon-text>
-                <icon-text icon="iconic_project" :text="item.distance+'，'+item.duration"></icon-text>
+                <van-row>
+                    <van-col span="12">
+                        <icon-text icon="iconren" :text="item.user" type="desc"></icon-text>
+                    </van-col>
+                    <van-col span="12">
+                        <icon-text icon="iconrizhiyichang" :text="item.distance+'，'+item.duration" type="desc"></icon-text>
+                    </van-col>
+                </van-row>
             </div>
             <div class="item-li">
-                <icon-text icon="iconic_project" :text="item.time"></icon-text>
+                <icon-text icon="iconriqi" :text="item.time" type="desc"></icon-text>
                 <van-button class="li-btn" type="info" size="mini">查 看 详 情</van-button>
             </div>
         </div>
@@ -65,6 +71,7 @@
 <script src="js/Calendar.umd.min.js"></script>
 <script src="js/IconText.js"></script>
 <script>
+
     // 注册 Vant 组件
     Vue.use(vant);
     Vue.use(Calendar);

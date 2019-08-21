@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巡查详情</title>
+    <link rel="stylesheet" href="css/vant.css">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1350866_fcmf35v7yis.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div id="app" style="display: none;" :style="{display: 'block'}">
+    <div class="_app-card">
+        <div class="card-title">基本信息</div>
+        <div class="card-content">
+            <div class="content-item">
+                <icon-text icon="icontitle-bar" text="巡查标题："></icon-text>
+                <div class="_item-field">
+                    <span v-text="data.title"></span>
+                </div>
+            </div>
+            <div class="content-item">
+                <icon-text icon="iconweizhi" text="巡查位置："></icon-text>
+                <div class="_item-field">
+                    <span v-text="data.location"></span>
+                </div>
+            </div>
+            <div class="content-item">
+                <icon-text icon="iconweizhi" text="起止地点："></icon-text>
+                <div class="_item-field">
+                    <span v-text="data.startEndAddress"></span>
+                </div>
+            </div>
+            <div class="content-item">
+                <icon-text icon="iconiconzhengli_xiangmu" text="项目名称："></icon-text>
+                <div class="_item-field">
+                    <span v-text="data.projectName"></span>
+                </div>
+            </div>
+            <div class="content-item">
+                <icon-text icon="iconbiaojidian1" text="标  段  栋："></icon-text>
+                <div class="_item-field">
+                    <span v-text="data.buildName"></span>
+                </div>
+            </div>
+            <div class="content-item">
+                <icon-text icon="iconrizhiyichang" text="是否异常："></icon-text>
+                <div class="_item-field">
+                    <span  :class="data.except==='异常'?'except':'normal'" v-text="data.except"></span>
+                </div>
+            </div>
+            <div class="content-item">
+                <icon-text icon="icontupian" text="巡查图片："></icon-text>
+                <div class="_item-field">
+                    <van-image v-for="(pic,index) in data.pics" @click="imgPreview(index)"
+                               width="3.2rem"
+                               height="3.2rem"
+                               fit="cover"
+                               :src="pic"
+                               class="field-img"
+                    ></van-image>
+                </div>
+            </div>
+            <div class="content-item">
+                <icon-text icon="iconbianji" text="详细说明："></icon-text>
+                <div class="_item-field">
+                    <span v-text="data.remark"></span>
+                </div>
+            </div>
+            <div class="content-item">
+                <icon-text icon="iconriqi" text="巡查日期："></icon-text>
+                <div class="_item-field">
+                    <span v-text="data.date"></span>
+                </div>
+            </div>
+            <div class="content-item">
+                <icon-text icon="iconren" text="巡查人员："></icon-text>
+                <div class="_item-field">
+                    <span v-text="data.user"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="_app-card">
+        <div class="card-title">巡查规范</div>
+        <div class="card-content">
+            <van-tabs v-model="active" swipeable>
+                <van-tab v-for="item in patrol" :title="item.title">
+                    <div class="_card-tab-content">
+                        <div class="_content-item item-title">
+                            <div class="_item-no">序号</div>
+                            <div class="_item-standard">规范</div>
+                            <div class="_item-check">是否规范</div>
+                        </div>
+                        <div class="_content-item" v-for="(_item,index) in item.data">
+                            <div class="_item-no">{{index+1}}</div>
+                            <div class="_item-standard">{{_item.item}}</div>
+                            <div class="_item-check" :class="_item.standard?'normal':'except'">{{_item.standard?'是':'否'}}</div>
+                        </div>
+                    </div>
+                </van-tab>
+            </van-tabs>
+        </div>
+    </div>
+    <div class="_app-row-btn">
+        <van-button type="info" class="btn" @click="save">保 存</van-button>
+        <van-button plain type="info" class="btn" @click="report">上 报</van-button>
+    </div>
+
+</div>
+<script src="js/vue.js"></script>
+<script src="js/vant.min.js"></script>
+<script src="js/IconText.js"></script>
+<script>
+    // 注册 Vant 组件
+    Vue.use(vant);
+    new Vue({
+        el:'#app',
+        components:{
+            'icon-text':iconText
+        },
+        data(){
+            return{
+                data:{
+                    title:'云西府一期3栋外立面脚手架有松动',
+                    location:'云西府一期3栋',
+                    startEndAddress:'云西府一期1栋-云西府一期5栋',
+                    projectName:'云西府',
+                    buildName:'3栋',
+                    except:'异常',
+                    pics:['https://img.yzcdn.cn/vant/cat.jpeg','https://img.yzcdn.cn/vant/cat.jpeg','https://img.yzcdn.cn/vant/cat.jpeg'],
+                    remark:'云西府一期3栋外立面脚手架有松动,云西府一期3栋外立面脚手架有松动,云西府一期3栋外立面脚手架有松动',
+                    date:'2019-08-20',
+                    user:'肖旭'
+                },
+                patrol:[
+                    {
+                        title:'储叶柜',
+                        data:[
+                            {
+                                item:'储叶柜尾部应该设置观察门，出料口应设置......',
+                                standard:true
+                            },
+                            {
+                                item:'储叶柜尾部应该设置观察门，出料口应设置......',
+                                standard:false
+                            },
+                            {
+                                item:'储叶柜尾部应该设置观察门，出料口应设置......',
+                                standard:true
+                            },
+                            {
+                                item:'储叶柜尾部应该设置观察门，出料口应设置......',
+                                standard:true
+                            },
+                            {
+                                item:'储叶柜尾部应该设置观察门，出料口应设置......',
+                                standard:false
+                            },
+                            {
+                                item:'储叶柜尾部应该设置观察门，出料口应设置......',
+                                standard:true
+                            }
+                        ]
+                    },
+                    {
+                        title:'轮扣式脚手架',
+                        data:[
+                            {
+                                item:'轮扣式脚手架尾部应该设置观察门，出料口应设置......',
+                                standard:true
+                            },
+                            {
+                                item:'轮扣式脚手架尾部应该设置观察门，出料口应设置......',
+                                standard:false
+                            },
+                            {
+                                item:'轮扣式脚手架尾部应该设置观察门，出料口应设置......',
+                                standard:true
+                            },
+                            {
+                                item:'轮扣式脚手架尾部应该设置观察门，出料口应设置......',
+                                standard:true
+                            },
+                            {
+                                item:'轮扣式脚手架尾部应该设置观察门，出料口应设置......',
+                                standard:false
+                            }
+                        ]
+                    },
+                    {
+                        title:'钢筋混凝土模板',
+                        data:[
+                            {
+                                item:'钢筋混凝土模板尾部应该设置观察门，出料口应设置......',
+                                standard:true
+                            },
+                            {
+                                item:'钢筋混凝土模板尾部应该设置观察门，出料口应设置......',
+                                standard:false
+                            },
+                            {
+                                item:'钢筋混凝土模板尾部应该设置观察门，出料口应设置......',
+                                standard:true
+                            }
+                        ]
+                    },
+                    {
+                        title:'塔式起重机',
+                        data:[
+                            {
+                                item:'塔式起重机尾部应该设置观察门，出料口应设置......',
+                                standard:true
+                            },
+                            {
+                                item:'塔式起重机尾部应该设置观察门，出料口应设置......',
+                                standard:false
+                            },
+                            {
+                                item:'塔式起重机尾部应该设置观察门，出料口应设置......',
+                                standard:true
+                            },
+                            {
+                                item:'塔式起重机尾部应该设置观察门，出料口应设置......',
+                                standard:true
+                            },
+                            {
+                                item:'塔式起重机尾部应该设置观察门，出料口应设置......',
+                                standard:false
+                            },
+                            {
+                                item:'塔式起重机尾部应该设置观察门，出料口应设置......',
+                                standard:true
+                            }
+                        ]
+                    }
+                ],
+                active:'储叶柜'
+            }
+        },
+        methods:{
+            imgPreview(index){
+                vant.ImagePreview({
+                    images: this.data.pics,
+                    startPosition: index
+                })
+            },
+            save(){
+                this.$toast('保存成功')
+            },
+            report(){
+                this.$toast('上报成功')
+            },
+        }
+    });
+</script>
+</body>
+</html>

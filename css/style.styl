@@ -4,6 +4,7 @@ $line=#e5e5e5
 $desc=#979799
 $background=#fff
 $warn=#FF3900
+$garyBackground=#E8E8E8
 #app{
   width 100%;
   min-height 100vh;
@@ -16,15 +17,24 @@ $warn=#FF3900
   }
 
   //========================IconText==================================
-  .icon_text{
-    display inline-block;
-    color $desc;
-  }
+  //.icon_text{
+  //  display inline-block;
+  //}
+  //.icon_text.desc-gray{
+  //  color $desc;
+  //}
+
+
+
   //=======================Vant Info Btn==================================
   .van-button--info{
     background-color $primary;
     border 1px solid $primary;
     padding 0 10px;
+  }
+  .van-button--plain.van-button--info{
+    background none;
+    color $primary;
   }
 
  //=========================    企业信息    ==============================
@@ -161,11 +171,7 @@ $warn=#FF3900
         }
         ._item-desc{
           margin 5px 0;
-          color $desc;
           font-size 14px;
-          span:first-child{
-            margin-right 10px;
-          }
         }
       }
       ._item-right{
@@ -200,7 +206,7 @@ $warn=#FF3900
       .item-li{
         margin 10px 0;
         .icon_text{
-          margin-right 20px;
+          font-size 14px;
         }
         .li-btn{
           float right;
@@ -256,6 +262,116 @@ $warn=#FF3900
         padding-bottom 5px;
         border-bottom 1px solid $line;
       }
+    }
+  }
+
+
+//==========================  巡查详情  =====================================
+
+  ._app-card{
+    margin 10px;
+    background $background;
+    border-radius 5px;
+    box-shadow 2px 2px 4px $line;
+    .card-title{
+      background $garyBackground;
+      border-top-left-radius 5px;
+      border-top-right-radius 5px;
+      color $primary;
+      padding 10px;
+    }
+    .card-content{
+      .content-item{
+        padding 10px 0;
+        margin 0 10px;
+        border-bottom 1px solid $line;
+        font-size 12px;
+        line-height 24px;
+        display flex;
+        .icon_text{
+          flex 0 0 90px;
+          span{
+            margin-left 5px;
+          }
+        }
+        ._item-field{
+          flex 1 1 auto;
+          .field-img{
+            margin: 0 10px 10px 0;
+          }
+          .field-img:last-of-type{
+            margin-right: 0;
+          }
+          .except{
+            color $warn;
+          }
+          .normal{
+            color $primary;
+          }
+          .van-cell{
+            padding 0;
+          }
+          .van-uploader__preview-image,.van-uploader__upload{
+            width 3.2rem;
+            height 3.2rem;
+          }
+          .van-uploader__upload{
+            margin 0;
+          }
+        }
+      }
+      ._card-tab-content{
+
+        ._content-item{
+          display flex;
+          padding 10px 0;
+          font-size 12px;
+          border-bottom 1px solid $line;
+          ._item-no{
+            flex 0 0 50px;
+            text-align center;
+            height: 24px;
+            line-height: 24px;
+          }
+          ._item-standard{
+            flex 1 1 auto;
+            text-align center;
+            word-break:keep-all;
+            white-space:nowrap;
+            overflow:hidden;
+            text-overflow:ellipsis;
+            height: 24px;
+            line-height: 24px;
+          }
+          ._item-check{
+            flex 0 0 80px;
+            text-align center;
+          }
+          .normal{
+            color $primary;
+          }
+          .except{
+            color $warn;
+          }
+        }
+        ._content-item.item-title{
+          background $primary;
+          color $background;
+          font-size 14px;
+        }
+      }
+    }
+  }
+
+  ._app-row-btn{
+    text-align center;
+    margin 20px;
+    .van-button{
+      width 40%;
+      margin-right 30px;
+    }
+    .van-button:last-of-type{
+      margin-right 0;
     }
   }
 }
